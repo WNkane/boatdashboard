@@ -1,0 +1,661 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A0EC49B2F66FEDD004803AC /* boatDashboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC49A2F66FEDD004803AC /* boatDashboardApp.swift */; };
+		5A0EC49F2F66FEDE004803AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A0EC49E2F66FEDE004803AC /* Assets.xcassets */; };
+		5A0EC4A22F66FEDE004803AC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A0EC4A12F66FEDE004803AC /* Preview Assets.xcassets */; };
+		5A0EC4AC2F66FEDE004803AC /* boatDashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4AB2F66FEDE004803AC /* boatDashboardTests.swift */; };
+		5A0EC4B62F66FEDE004803AC /* boatDashboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4B52F66FEDE004803AC /* boatDashboardUITests.swift */; };
+		5A0EC4B82F66FEDE004803AC /* boatDashboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4B72F66FEDE004803AC /* boatDashboardUITestsLaunchTests.swift */; };
+		5A0EC4C62F66FF0A004803AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4C42F66FF0A004803AC /* ContentView.swift */; };
+		5A0EC4C72F66FF0A004803AC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4C52F66FF0A004803AC /* LocationManager.swift */; };
+		5A0EC4C82F66FF0A004803AC /* ActivitySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4C92F66FF0A004803AC /* ActivitySummaryView.swift */; };
+		5A0EC4DA2F670002004803AC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4DB2F670002004803AC /* Models.swift */; };
+		5A0EC4DC2F670002004803AC /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4DD2F670002004803AC /* DataStore.swift */; };
+		5A0EC4DE2F670002004803AC /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4DF2F670002004803AC /* AppView.swift */; };
+		5A0EC4E02F670002004803AC /* DashboardHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4E12F670002004803AC /* DashboardHomeView.swift */; };
+		5A0EC4E22F670002004803AC /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4E32F670002004803AC /* WorkoutListView.swift */; };
+		5A0EC4E42F670002004803AC /* WorkoutEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4E52F670002004803AC /* WorkoutEditorView.swift */; };
+		5A0EC4E62F670002004803AC /* LiveDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4E72F670002004803AC /* LiveDashboardView.swift */; };
+		5A0EC4E82F670002004803AC /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4E92F670002004803AC /* RecordsView.swift */; };
+		5A0EC4EA2F670002004803AC /* DragonBoatIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4EB2F670002004803AC /* DragonBoatIcon.swift */; };
+		5A0EC4EC2F670002004803AC /* TrainingAudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4ED2F670002004803AC /* TrainingAudioManager.swift */; };
+		5A0EC4EE2F670002004803AC /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4EF2F670002004803AC /* WeatherService.swift */; };
+		5A0EC4F02F670002004803AC /* BluetoothHeartRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */; };
+		5A0EC4F22F670002004803AC /* HeartRateDevicePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */; };
+		5A0EC4F42F670002004803AC /* BluetoothCadenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5A0EC4A82F66FEDE004803AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0EC48F2F66FEDD004803AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A0EC4962F66FEDD004803AC;
+			remoteInfo = boatDashboard;
+		};
+		5A0EC4B22F66FEDE004803AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A0EC48F2F66FEDD004803AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A0EC4962F66FEDD004803AC;
+			remoteInfo = boatDashboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5A0EC4972F66FEDD004803AC /* boatDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = boatDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A0EC49A2F66FEDD004803AC /* boatDashboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boatDashboardApp.swift; sourceTree = "<group>"; };
+		5A0EC49E2F66FEDE004803AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5A0EC4A12F66FEDE004803AC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5A0EC4A72F66FEDE004803AC /* boatDashboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = boatDashboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A0EC4AB2F66FEDE004803AC /* boatDashboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boatDashboardTests.swift; sourceTree = "<group>"; };
+		5A0EC4B12F66FEDE004803AC /* boatDashboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = boatDashboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A0EC4B52F66FEDE004803AC /* boatDashboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boatDashboardUITests.swift; sourceTree = "<group>"; };
+		5A0EC4B72F66FEDE004803AC /* boatDashboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boatDashboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5A0EC4C42F66FF0A004803AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5A0EC4C52F66FF0A004803AC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		5A0EC4C92F66FF0A004803AC /* ActivitySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySummaryView.swift; sourceTree = "<group>"; };
+		5A0EC4DB2F670002004803AC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		5A0EC4DD2F670002004803AC /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		5A0EC4DF2F670002004803AC /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		5A0EC4E12F670002004803AC /* DashboardHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardHomeView.swift; sourceTree = "<group>"; };
+		5A0EC4E32F670002004803AC /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
+		5A0EC4E52F670002004803AC /* WorkoutEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutEditorView.swift; sourceTree = "<group>"; };
+		5A0EC4E72F670002004803AC /* LiveDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDashboardView.swift; sourceTree = "<group>"; };
+		5A0EC4E92F670002004803AC /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
+		5A0EC4EB2F670002004803AC /* DragonBoatIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBoatIcon.swift; sourceTree = "<group>"; };
+		5A0EC4ED2F670002004803AC /* TrainingAudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingAudioManager.swift; sourceTree = "<group>"; };
+		5A0EC4EF2F670002004803AC /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothHeartRateManager.swift; sourceTree = "<group>"; };
+		5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateDevicePickerView.swift; sourceTree = "<group>"; };
+		5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCadenceManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A0EC4942F66FEDD004803AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4A42F66FEDE004803AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4AE2F66FEDE004803AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A0EC48E2F66FEDD004803AC = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4992F66FEDD004803AC /* boatDashboard */,
+				5A0EC4AA2F66FEDE004803AC /* boatDashboardTests */,
+				5A0EC4B42F66FEDE004803AC /* boatDashboardUITests */,
+				5A0EC4982F66FEDD004803AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5A0EC4982F66FEDD004803AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4972F66FEDD004803AC /* boatDashboard.app */,
+				5A0EC4A72F66FEDE004803AC /* boatDashboardTests.xctest */,
+				5A0EC4B12F66FEDE004803AC /* boatDashboardUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A0EC4992F66FEDD004803AC /* boatDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4DB2F670002004803AC /* Models.swift */,
+				5A0EC4DD2F670002004803AC /* DataStore.swift */,
+				5A0EC4DF2F670002004803AC /* AppView.swift */,
+				5A0EC4E12F670002004803AC /* DashboardHomeView.swift */,
+				5A0EC4E32F670002004803AC /* WorkoutListView.swift */,
+				5A0EC4E52F670002004803AC /* WorkoutEditorView.swift */,
+				5A0EC4E72F670002004803AC /* LiveDashboardView.swift */,
+				5A0EC4E92F670002004803AC /* RecordsView.swift */,
+				5A0EC4EB2F670002004803AC /* DragonBoatIcon.swift */,
+				5A0EC4ED2F670002004803AC /* TrainingAudioManager.swift */,
+				5A0EC4EF2F670002004803AC /* WeatherService.swift */,
+				5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */,
+				5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */,
+				5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */,
+				5A0EC4C42F66FF0A004803AC /* ContentView.swift */,
+				5A0EC4C52F66FF0A004803AC /* LocationManager.swift */,
+				5A0EC4C92F66FF0A004803AC /* ActivitySummaryView.swift */,
+				5A0EC49A2F66FEDD004803AC /* boatDashboardApp.swift */,
+				5A0EC49E2F66FEDE004803AC /* Assets.xcassets */,
+				5A0EC4A02F66FEDE004803AC /* Preview Content */,
+			);
+			path = boatDashboard;
+			sourceTree = "<group>";
+		};
+		5A0EC4A02F66FEDE004803AC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4A12F66FEDE004803AC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5A0EC4AA2F66FEDE004803AC /* boatDashboardTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4AB2F66FEDE004803AC /* boatDashboardTests.swift */,
+			);
+			path = boatDashboardTests;
+			sourceTree = "<group>";
+		};
+		5A0EC4B42F66FEDE004803AC /* boatDashboardUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5A0EC4B52F66FEDE004803AC /* boatDashboardUITests.swift */,
+				5A0EC4B72F66FEDE004803AC /* boatDashboardUITestsLaunchTests.swift */,
+			);
+			path = boatDashboardUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A0EC4962F66FEDD004803AC /* boatDashboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A0EC4BB2F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboard" */;
+			buildPhases = (
+				5A0EC4932F66FEDD004803AC /* Sources */,
+				5A0EC4942F66FEDD004803AC /* Frameworks */,
+				5A0EC4952F66FEDD004803AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = boatDashboard;
+			productName = boatDashboard;
+			productReference = 5A0EC4972F66FEDD004803AC /* boatDashboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5A0EC4A62F66FEDE004803AC /* boatDashboardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A0EC4BE2F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboardTests" */;
+			buildPhases = (
+				5A0EC4A32F66FEDE004803AC /* Sources */,
+				5A0EC4A42F66FEDE004803AC /* Frameworks */,
+				5A0EC4A52F66FEDE004803AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A0EC4A92F66FEDE004803AC /* PBXTargetDependency */,
+			);
+			name = boatDashboardTests;
+			productName = boatDashboardTests;
+			productReference = 5A0EC4A72F66FEDE004803AC /* boatDashboardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5A0EC4B02F66FEDE004803AC /* boatDashboardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A0EC4C12F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboardUITests" */;
+			buildPhases = (
+				5A0EC4AD2F66FEDE004803AC /* Sources */,
+				5A0EC4AE2F66FEDE004803AC /* Frameworks */,
+				5A0EC4AF2F66FEDE004803AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A0EC4B32F66FEDE004803AC /* PBXTargetDependency */,
+			);
+			name = boatDashboardUITests;
+			productName = boatDashboardUITests;
+			productReference = 5A0EC4B12F66FEDE004803AC /* boatDashboardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A0EC48F2F66FEDD004803AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					5A0EC4962F66FEDD004803AC = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					5A0EC4A62F66FEDE004803AC = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 5A0EC4962F66FEDD004803AC;
+					};
+					5A0EC4B02F66FEDE004803AC = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 5A0EC4962F66FEDD004803AC;
+					};
+				};
+			};
+			buildConfigurationList = 5A0EC4922F66FEDD004803AC /* Build configuration list for PBXProject "boatDashboard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5A0EC48E2F66FEDD004803AC;
+			productRefGroup = 5A0EC4982F66FEDD004803AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A0EC4962F66FEDD004803AC /* boatDashboard */,
+				5A0EC4A62F66FEDE004803AC /* boatDashboardTests */,
+				5A0EC4B02F66FEDE004803AC /* boatDashboardUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5A0EC4952F66FEDD004803AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0EC4A22F66FEDE004803AC /* Preview Assets.xcassets in Resources */,
+				5A0EC49F2F66FEDE004803AC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4A52F66FEDE004803AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4AF2F66FEDE004803AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A0EC4932F66FEDD004803AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0EC4C62F66FF0A004803AC /* ContentView.swift in Sources */,
+				5A0EC49B2F66FEDD004803AC /* boatDashboardApp.swift in Sources */,
+				5A0EC4C72F66FF0A004803AC /* LocationManager.swift in Sources */,
+				5A0EC4C82F66FF0A004803AC /* ActivitySummaryView.swift in Sources */,
+				5A0EC4DA2F670002004803AC /* Models.swift in Sources */,
+				5A0EC4DC2F670002004803AC /* DataStore.swift in Sources */,
+				5A0EC4DE2F670002004803AC /* AppView.swift in Sources */,
+				5A0EC4E02F670002004803AC /* DashboardHomeView.swift in Sources */,
+				5A0EC4E22F670002004803AC /* WorkoutListView.swift in Sources */,
+				5A0EC4E42F670002004803AC /* WorkoutEditorView.swift in Sources */,
+				5A0EC4E62F670002004803AC /* LiveDashboardView.swift in Sources */,
+				5A0EC4E82F670002004803AC /* RecordsView.swift in Sources */,
+				5A0EC4EA2F670002004803AC /* DragonBoatIcon.swift in Sources */,
+				5A0EC4EC2F670002004803AC /* TrainingAudioManager.swift in Sources */,
+				5A0EC4EE2F670002004803AC /* WeatherService.swift in Sources */,
+				5A0EC4F02F670002004803AC /* BluetoothHeartRateManager.swift in Sources */,
+				5A0EC4F22F670002004803AC /* HeartRateDevicePickerView.swift in Sources */,
+				5A0EC4F42F670002004803AC /* BluetoothCadenceManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4A32F66FEDE004803AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0EC4AC2F66FEDE004803AC /* boatDashboardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A0EC4AD2F66FEDE004803AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0EC4B62F66FEDE004803AC /* boatDashboardUITests.swift in Sources */,
+				5A0EC4B82F66FEDE004803AC /* boatDashboardUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A0EC4A92F66FEDE004803AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A0EC4962F66FEDD004803AC /* boatDashboard */;
+			targetProxy = 5A0EC4A82F66FEDE004803AC /* PBXContainerItemProxy */;
+		};
+		5A0EC4B32F66FEDE004803AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A0EC4962F66FEDD004803AC /* boatDashboard */;
+			targetProxy = 5A0EC4B22F66FEDE004803AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5A0EC4B92F66FEDE004803AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5A0EC4BA2F66FEDE004803AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5A0EC4BC2F66FEDE004803AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"boatDashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = 9WDY93MS5V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要藍牙以連接 Garmin 手錶讀取即時心率數據。";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要持續定位以追蹤划槳路線與計算距離。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要存取您的位置以顯示地圖和即時速度資訊。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "儲存訓練總結截圖至相簿。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5A0EC4BD2F66FEDE004803AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"boatDashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = 9WDY93MS5V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要藍牙以連接 Garmin 手錶讀取即時心率數據。";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要持續定位以追蹤划槳路線與計算距離。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要存取您的位置以顯示地圖和即時速度資訊。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "儲存訓練總結截圖至相簿。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5A0EC4BF2F66FEDE004803AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/boatDashboard.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/boatDashboard";
+			};
+			name = Debug;
+		};
+		5A0EC4C02F66FEDE004803AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/boatDashboard.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/boatDashboard";
+			};
+			name = Release;
+		};
+		5A0EC4C22F66FEDE004803AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = boatDashboard;
+			};
+			name = Debug;
+		};
+		5A0EC4C32F66FEDE004803AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = boatDashboard;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A0EC4922F66FEDD004803AC /* Build configuration list for PBXProject "boatDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A0EC4B92F66FEDE004803AC /* Debug */,
+				5A0EC4BA2F66FEDE004803AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A0EC4BB2F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A0EC4BC2F66FEDE004803AC /* Debug */,
+				5A0EC4BD2F66FEDE004803AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A0EC4BE2F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A0EC4BF2F66FEDE004803AC /* Debug */,
+				5A0EC4C02F66FEDE004803AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A0EC4C12F66FEDE004803AC /* Build configuration list for PBXNativeTarget "boatDashboardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A0EC4C22F66FEDE004803AC /* Debug */,
+				5A0EC4C32F66FEDE004803AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5A0EC48F2F66FEDD004803AC /* Project object */;
+}

@@ -1,2 +1,7 @@
-boatDashboard/
+# Xcode
+boatDashboard/*.xcodeproj/xcuserdata/
+boatDashboard/*.xcodeproj/project.xcworkspace/xcuserdata/
+boatDashboard/DerivedData/
+boatDashboard/*.xcworkspace/xcuserdata/
+
 .DS_Store

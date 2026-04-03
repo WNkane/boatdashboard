@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(sips:*)",
+      "Bash(python3:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.brytonsport.com.tw)",
+      "WebSearch",
+      "Bash(xcodebuild:*)",
+      "Bash(plutil:*)",
+      "Bash(sudo xcode-select:*)"
+    ]
+  }
+}
