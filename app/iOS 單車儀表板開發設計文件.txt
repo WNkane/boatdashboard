@@ -1,0 +1,33 @@
+1. 專案目標
+
+開發一個專為單車設計的即時儀表板 App，採用上下分層設計，優先確保 GPS 準確度與資訊清晰度。
+
+2. 介面佈局 (UI Layout)
+
+上半部 (50% 螢幕)：
+
+Map 模組： 滿版地圖，自動追蹤用戶位置（Follow user location）。
+
+UI 組件： Map (SwiftUI MapKit)。
+
+下半部 (50% 螢幕)：
+
+數據顯示區： 背景採黑色（高對比度，適合大太陽下騎乘）。
+
+數據項 (依序排列)：
+
+時速 (Speed)： 最大字體，顯示 km/h。
+
+踏頻 (Cadence)： 中型字體，預留藍牙接入介面。
+
+心率 (Heart Rate)： 中型字體，預留藍牙接入介面。
+
+3. 功能開發任務 (Tasks for Claude)
+
+專案初始化： 建立一個 SwiftUI 專案。
+
+地圖模組： 使用 MapKit 建立一個 MapView，並實作定位授權請求。
+
+GPS 管理： 建立 LocationManager 類別，獲取 CLLocation 資料中的 speed（需處理 m/s 轉 km/h）。
+
+數據儀表板： 建立一個乾淨的 VStack 佈局，呈現下半部的數值。

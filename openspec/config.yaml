@@ -1,0 +1,29 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Swift, SwiftUI, iOS
+  Architecture: MVVM
+  Domain: 龍舟訓練儀表板應用（Dragon Boat Training Dashboard）
+  Language: 繁體中文（UI 文字與語音播報）
+
+  Key components:
+  - DataStore: 中央資料層，UserDefaults 持久化
+  - LocationManager: GPS 速度/功率計算，整合 BLE 感測器與天氣
+  - BluetoothHeartRateManager: BLE Heart Rate Profile (UUID: 180D)
+  - BluetoothCadenceManager: BLE CSC Profile (UUID: 1816)
+  - WeatherService: 台灣中央氣象局 CWA OpenData API
+  - TrainingAudioManager: AVSpeechSynthesizer 中文 TTS 播報
+
+  Conventions:
+  - 所有回應與文件使用繁體中文
+  - 功率區間色碼：恢復(藍) / 基礎(綠) / 臨界(黃) / 高強度(橙) / 衝刺(紅)
+  - 模擬器預設位置：碧潭 (24.9603, 121.5399)
+
+rules:
+  proposal:
+    - 使用繁體中文撰寫
+    - 必須包含「非目標（Non-goals）」章節
+    - 不確定的需求標記為 TBD
+  tasks:
+    - 每個任務拆分為最多 2 小時的工作量
+    - 標明相關檔案路徑
