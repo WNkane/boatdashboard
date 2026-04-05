@@ -1,13 +1,15 @@
 import SwiftUI
+import SwiftData
 import Charts
 
 // MARK: - Dashboard Home
 
 struct DashboardHomeView: View {
-    @EnvironmentObject var dataStore: DataStore
     @EnvironmentObject var locationManager: LocationManager
+    @Query(sort: \DragonBoatActivity.startTime, order: .reverse)
+    private var activities: [DragonBoatActivity]
 
-    private var lastRecord: TrainingRecord? { dataStore.records.first }
+    private var lastActivity: DragonBoatActivity? { activities.first }
 
     private var weeklyData: [(day: String, km: Double)] {
         let calendar = Calendar.current
@@ -16,8 +18,8 @@ struct DashboardHomeView: View {
         return (0..<7).map { offset in
             let date = calendar.date(byAdding: .day, value: -(6 - offset), to: now)!
             let weekdayIdx = (calendar.component(.weekday, from: date) + 5) % 7
-            let km = dataStore.records
-                .filter { calendar.isDate($0.date, inSameDayAs: date) }
+            let km = activities
+                .filter { calendar.isDate($0.startTime, inSameDayAs: date) }
                 .reduce(0) { $0 + $1.distanceKm }
             return (day: weekdays[weekdayIdx], km: km)
         }
@@ -31,8 +33,8 @@ struct DashboardHomeView: View {
                 WeatherStatusRow(weather: locationManager.stationWeather)
                     .padding(.horizontal, 4)
 
-                if let record = lastRecord {
-                    LastPerformanceCard(record: record)
+                if let activity = lastActivity {
+                    LastPerformanceCard(activity: activity)
                 } else {
                     NoRideCard()
                 }
@@ -50,7 +52,7 @@ struct DashboardHomeView: View {
 // MARK: - Last Performance Card
 
 struct LastPerformanceCard: View {
-    let record: TrainingRecord
+    let activity: DragonBoatActivity
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -59,7 +61,7 @@ struct LastPerformanceCard: View {
                     .font(.caption.bold())
                     .foregroundStyle(.orange)
                 Spacer()
-                Text(record.dateFormatted)
+                Text(activity.dateFormatted)
                     .font(.caption2)
                     .foregroundStyle(.gray)
             }
@@ -70,17 +72,17 @@ struct LastPerformanceCard: View {
                 columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())],
                 spacing: 14
             ) {
-                SummaryMetric(label: "距離",    value: String(format: "%.2f", record.distanceKm),         unit: "km",   color: .cyan)
-                SummaryMetric(label: "均速",    value: String(format: "%.1f", record.averageSpeedKmh),   unit: "km/h", color: .orange)
-                SummaryMetric(label: "時間",    value: record.durationFormatted,                         unit: "",     color: .white)
-                SummaryMetric(label: "平均心率", value: record.averageHeartRate > 0 ? "\(record.averageHeartRate)" : "--",
-                              unit: "bpm", color: HRZone.zone(for: record.averageHeartRate).color)
-                SummaryMetric(label: "最高心率", value: record.maxHeartRate > 0 ? "\(record.maxHeartRate)" : "--",
-                              unit: "bpm", color: HRZone.zone(for: record.maxHeartRate).color)
-                SummaryMetric(label: "槳頻",    value: String(format: "%.0f", record.averageCadence),   unit: "spm",  color: .purple)
+                SummaryMetric(label: "距離",    value: String(format: "%.2f", activity.distanceKm),       unit: "km",   color: .cyan)
+                SummaryMetric(label: "均速",    value: String(format: "%.1f", activity.averageSpeedKmh),  unit: "km/h", color: .orange)
+                SummaryMetric(label: "時間",    value: activity.durationFormatted,                        unit: "",     color: .white)
+                SummaryMetric(label: "平均心率", value: activity.averageHeartRate > 0 ? "\(activity.averageHeartRate)" : "--",
+                              unit: "bpm", color: HRZone.zone(for: activity.averageHeartRate).color)
+                SummaryMetric(label: "最高心率", value: activity.maxHeartRate > 0 ? "\(activity.maxHeartRate)" : "--",
+                              unit: "bpm", color: HRZone.zone(for: activity.maxHeartRate).color)
+                SummaryMetric(label: "槳頻",    value: String(format: "%.0f", activity.averageCadence),  unit: "spm",  color: .purple)
             }
 
-            if let name = record.workoutName {
+            if let name = activity.workoutName {
                 Label(name, systemImage: "list.bullet.clipboard")
                     .font(.caption)
                     .foregroundStyle(.gray)

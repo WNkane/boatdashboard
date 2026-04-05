@@ -19,32 +19,32 @@
 
 ## 4. RecordsView 改版
 
-- [ ] 4.1 修改 `RecordsView.swift`：將 `dataStore.records` 改為 `@Query(sort: \DragonBoatActivity.startTime, order: .reverse) var activities`
-- [ ] 4.2 實作右滑刪除（`.onDelete`）呼叫 `modelContext.delete(activity)`（CASCADE 自動刪除 DataPoints）
-- [ ] 4.3 更新 `RecordRow` 改用 `DragonBoatActivity` 屬性（name, startTime, totalDistanceMeters, duration）
+- [x] 4.1 修改 `RecordsView.swift`：將 `dataStore.records` 改為 `@Query(sort: \DragonBoatActivity.startTime, order: .reverse) var activities`
+- [x] 4.2 實作右滑刪除（`.onDelete`）呼叫 `modelContext.delete(activity)`（CASCADE 自動刪除 DataPoints）
+- [x] 4.3 更新 `RecordRow` 改用 `DragonBoatActivity` 屬性（name, startTime, totalDistanceMeters, duration）
 
 ## 5. ActivityDetailView — 基礎框架
 
-- [ ] 5.1 新建 `ActivityDetailView.swift`，接受 `DragonBoatActivity` 參數
-- [ ] 5.2 頂部靜態地圖：以 `Map` + `MapPolyline` 繪製軌跡，`MKMapRect` fit 範圍（spec: activity-detail-chart §頂部靜態軌跡地圖）
-- [ ] 5.3 新增 `movingAverage(_ data: [Double], window: Int = 5) -> [Double]` 工具函式（spec: activity-detail-chart §數據平滑）
+- [x] 5.1 新建 `ActivityDetailView.swift`，接受 `DragonBoatActivity` 參數
+- [x] 5.2 頂部靜態地圖：以 `Map` + `MapPolyline` 繪製軌跡，`MKMapRect` fit 範圍（spec: activity-detail-chart §頂部靜態軌跡地圖）
+- [x] 5.3 新增 `movingAverage(_ data: [Double], window: Int = 5) -> [Double]` 工具函式（spec: activity-detail-chart §數據平滑）
 
 ## 6. ActivityDetailView — 三圖表實作
 
-- [ ] 6.1 實作 `SpeedChartView`（Area + Line，淺藍色，X 軸時間，Y 軸 km/h）
-- [ ] 6.2 實作 `HeartRateChartView`（螢光紅，加平均心率虛線 + 最高心率點線）（spec: activity-detail-chart §心率參考線）
-- [ ] 6.3 實作 `CadenceChartView`（Vaaka 橘，SPM）
-- [ ] 6.4 三張圖共用 `@State var scrubTime: Date?`，傳入各圖作 `Binding`
+- [x] 6.1 實作 `SpeedChartView`（Area + Line，淺藍色，X 軸時間，Y 軸 km/h）
+- [x] 6.2 實作 `HeartRateChartView`（螢光紅，加平均心率虛線 + 最高心率點線）（spec: activity-detail-chart §心率參考線）
+- [x] 6.3 實作 `CadenceChartView`（Vaaka 橘，SPM）
+- [x] 6.4 三張圖共用 `@State var scrubTime: Date?`，傳入各圖作 `Binding`
 
 ## 7. 同步滑動互動（Synchronized Scrubbing）
 
-- [ ] 7.1 在每張圖表 overlay `DragGesture`，將 x 偏移換算為時間戳更新 `scrubTime`
-- [ ] 7.2 各圖表根據 `scrubTime` 繪製垂直線（`RuleMark`）與 data label（`annotation`）
-- [ ] 7.3 地圖根據 `scrubTime` 找最近 DataPoint 座標，更新 `MapAnnotation` 標記位置（spec: activity-detail-chart §同步滑動標記）
+- [x] 7.1 在每張圖表 overlay `DragGesture`，將 x 偏移換算為時間戳更新 `scrubTime`
+- [x] 7.2 各圖表根據 `scrubTime` 繪製垂直線（`RuleMark`）與 data label（`annotation`）
+- [x] 7.3 地圖根據 `scrubTime` 找最近 DataPoint 座標，更新 `MapAnnotation` 標記位置（spec: activity-detail-chart §同步滑動標記）
 
 ## 8. 收尾與整合
 
-- [ ] 8.1 在 `RecordsView` 的 `.sheet` 改為推送 `ActivityDetailView`（或 `NavigationLink`）
-- [ ] 8.2 模擬器測試：用 `simulatePaddling` 產生測試資料，確認圖表與地圖正常渲染
-- [ ] 8.3 確認 SwiftData 刪除功能：刪除一筆 Activity 後 DataPoints 也一併清除
-- [ ] 8.4 git commit & push（附 change name tag）
+- [x] 8.1 在 `RecordsView` 的 `.sheet` 改為推送 `ActivityDetailView`（或 `NavigationLink`）
+- [x] 8.2 模擬器測試：用 `simulatePaddling` 產生測試資料，確認圖表與地圖正常渲染
+- [x] 8.3 確認 SwiftData 刪除功能：刪除一筆 Activity 後 DataPoints 也一併清除
+- [x] 8.4 git commit & push（附 change name tag）
