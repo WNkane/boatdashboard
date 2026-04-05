@@ -14,7 +14,6 @@ struct LiveDashboardView: View {
         followsHeading: true, fallback: .automatic
     )
     @State private var showSummary    = false
-    @State private var savedRecord: TrainingRecord? = nil
 
     // Audio
     @StateObject private var audioManager = TrainingAudioManager()
@@ -163,9 +162,7 @@ struct LiveDashboardView: View {
         }
         .ignoresSafeArea()
         .sheet(isPresented: $showSummary) {
-            if let record = savedRecord {
-                RecordSummaryView(record: record)
-            }
+            RideSavedSheet(onDismiss: { showSummary = false; currentRoute = .records })
         }
         .sheet(isPresented: $showHRPicker) {
             HeartRateDevicePickerView(hrManager: locationManager.hrManager)
@@ -201,29 +198,23 @@ struct LiveDashboardView: View {
     }
 
     private func endRide() {
-        locationManager.stopRide()
+        let points = locationManager.stopRide()
         stopTimer()
 
-        let elapsed = rideStartTime.map { Date().timeIntervalSince($0) } ?? 0
+        let endTime   = Date()
+        let startTime = rideStartTime ?? endTime
 
-        let record = TrainingRecord(
-            date: Date(),
-            durationSeconds: Int(elapsed),
-            totalDistanceMeters: locationManager.totalDistance,
-            averageSpeedKmh: locationManager.averageSpeed,
-            maxSpeedKmh: locationManager.maxSpeed,
-            totalElevationGain: locationManager.totalElevationGain,
-            speedHistory: locationManager.speedHistory,
-            cadenceHistory: [],
-            averageCadence: 0,
-            maxCadence: 0,
-            workoutName: workoutPlan?.name,
-            heartRateHistory: locationManager.heartRateHistory,
-            averageHeartRate: locationManager.averageHeartRate,
-            maxHeartRate: locationManager.maxHeartRate
+        dataStore.saveActivity(
+            points:               points,
+            startTime:            startTime,
+            endTime:              endTime,
+            totalDistanceMeters:  locationManager.totalDistance,
+            averageSpeedKmh:      locationManager.averageSpeed,
+            maxSpeedKmh:          locationManager.maxSpeed,
+            averageHeartRate:     locationManager.averageHeartRate,
+            maxHeartRate:         locationManager.maxHeartRate,
+            workoutName:          workoutPlan?.name
         )
-        dataStore.saveRecord(record)
-        savedRecord = record
         showSummary = true
     }
 
@@ -660,6 +651,50 @@ struct CadenceDevicePickerView: View {
         case .bluetoothOff: return "請開啟藍牙"
         default:            return "附近裝置（\(cadenceManager.discoveredDevices.count) 個）"
         }
+    }
+}
+
+// MARK: - Ride Saved Sheet
+
+struct RideSavedSheet: View {
+    let onDismiss: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color.black.ignoresSafeArea()
+                VStack(spacing: 20) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 64))
+                        .foregroundStyle(.orange)
+                    Text("訓練已儲存")
+                        .font(.title2.bold())
+                        .foregroundStyle(.white)
+                    Text("前往訓練紀錄查看詳細圖表分析")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                        .multilineTextAlignment(.center)
+                    Button(action: onDismiss) {
+                        Text("查看紀錄")
+                            .font(.headline)
+                            .foregroundStyle(.black)
+                            .padding(.horizontal, 32)
+                            .padding(.vertical, 14)
+                            .background(Capsule().fill(Color.orange))
+                    }
+                    .padding(.top, 8)
+                }
+                .padding()
+            }
+            .navigationTitle("")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("關閉") { onDismiss() }.foregroundStyle(.orange)
+                }
+            }
+        }
+        .preferredColorScheme(.dark)
     }
 }
 

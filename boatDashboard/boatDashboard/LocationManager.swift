@@ -32,6 +32,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var maxHeartRate: Int = 0
     @Published var averageHeartRate: Int = 0
 
+    // MARK: - DataPoint accumulation
+    private(set) var pendingDataPoints: [PendingDataPoint] = []
+    private var dataPointTimer: Timer?
+    private var lastKnownLocation: CLLocation?
+
     private var previousLocation: CLLocation?
 
     // MARK: - Init
@@ -70,11 +75,45 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         maxHeartRate = 0
         averageHeartRate = 0
         previousLocation = nil
+        pendingDataPoints = []
         isRiding = true
+        startDataPointTimer()
     }
 
-    func stopRide() {
+    func stopRide() -> [PendingDataPoint] {
         isRiding = false
+        stopDataPointTimer()
+        let points = pendingDataPoints
+        pendingDataPoints = []
+        return points
+    }
+
+    // MARK: - DataPoint Timer
+
+    private func startDataPointTimer() {
+        dataPointTimer?.invalidate()
+        dataPointTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.appendDataPoint()
+        }
+    }
+
+    private func stopDataPointTimer() {
+        dataPointTimer?.invalidate()
+        dataPointTimer = nil
+    }
+
+    private func appendDataPoint() {
+        let loc = lastKnownLocation
+        let point = PendingDataPoint(
+            timestamp:      Date(),
+            speedKmh:       speed,   // already 0.0 when GPS speed < 0 (see processLocation)
+            cadenceSpm:     cadence,
+            heartRateBpm:   heartRate,
+            latitude:       loc?.coordinate.latitude  ?? 0,
+            longitude:      loc?.coordinate.longitude ?? 0,
+            altitudeMeters: loc?.altitude             ?? 0
+        )
+        pendingDataPoints.append(point)
     }
 
     // MARK: - CLLocationManagerDelegate
@@ -105,8 +144,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     // MARK: - Core location processing (shared by real GPS and simulator mock)
 
     private func processLocation(_ location: CLLocation) {
+        lastKnownLocation = location
         let rawSpeed = location.speed
-        let kmh = rawSpeed >= 0 ? rawSpeed * 3.6 : 0
+        let kmh = rawSpeed >= 0 ? rawSpeed * 3.6 : 0   // Task 2.4: speed < 0 → 0.0
         speed = kmh
         heading = location.course  // -1 when unavailable
 

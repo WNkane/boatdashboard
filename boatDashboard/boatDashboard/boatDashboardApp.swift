@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct boatDashboardApp: App {
@@ -13,5 +14,6 @@ struct boatDashboardApp: App {
         WindowGroup {
             AppView()
         }
+        .modelContainer(for: [DragonBoatActivity.self, ActivityDataPoint.self])
     }
 }

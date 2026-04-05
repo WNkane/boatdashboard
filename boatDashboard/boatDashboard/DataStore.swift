@@ -1,10 +1,14 @@
 import Foundation
+import SwiftData
 
 class DataStore: ObservableObject {
     @Published var workouts: [WorkoutPlan] = []
     @Published var records: [TrainingRecord] = []
 
     let locationManager = LocationManager()
+
+    // SwiftData context — injected after ModelContainer is available
+    var modelContext: ModelContext?
 
     private let workoutsKey = "savedWorkouts_v3"   // HR-based intervals
     private let recordsKey  = "savedRecords_v2"    // HR fields added
@@ -13,6 +17,63 @@ class DataStore: ObservableObject {
         loadWorkouts()
         loadRecords()
         if workouts.isEmpty { seedDefaultWorkouts() }
+    }
+
+    // MARK: - SwiftData Activity
+
+    func saveActivity(points: [PendingDataPoint],
+                      startTime: Date,
+                      endTime: Date,
+                      totalDistanceMeters: Double,
+                      averageSpeedKmh: Double,
+                      maxSpeedKmh: Double,
+                      averageHeartRate: Int,
+                      maxHeartRate: Int,
+                      workoutName: String?) {
+        guard let context = modelContext else { return }
+
+        // Compute cadence stats from points
+        let cadenceValues = points.map { $0.cadenceSpm }.filter { $0 > 0 }
+        let avgCadence  = cadenceValues.isEmpty ? 0.0 : Double(cadenceValues.reduce(0, +)) / Double(cadenceValues.count)
+        let maxCadence  = cadenceValues.max() ?? 0
+
+        let fmt = DateFormatter()
+        fmt.dateStyle = .medium
+        fmt.timeStyle = .short
+        fmt.locale = Locale(identifier: "zh_TW")
+        let name = workoutName ?? fmt.string(from: startTime)
+
+        let activity = DragonBoatActivity(
+            name:                 name,
+            startTime:            startTime,
+            endTime:              endTime,
+            totalDistanceMeters:  totalDistanceMeters,
+            averageSpeedKmh:      averageSpeedKmh,
+            maxSpeedKmh:          maxSpeedKmh,
+            averageCadence:       avgCadence,
+            maxCadence:           maxCadence,
+            averageHeartRate:     averageHeartRate,
+            maxHeartRate:         maxHeartRate,
+            workoutName:          workoutName
+        )
+
+        for p in points {
+            let dp = ActivityDataPoint(
+                timestamp:      p.timestamp,
+                speedKmh:       p.speedKmh,
+                cadenceSpm:     p.cadenceSpm,
+                heartRateBpm:   p.heartRateBpm,
+                latitude:       p.latitude,
+                longitude:      p.longitude,
+                altitudeMeters: p.altitudeMeters
+            )
+            dp.activity = activity
+            activity.dataPoints.append(dp)
+            context.insert(dp)
+        }
+
+        context.insert(activity)
+        try? context.save()
     }
 
     // MARK: - Workouts

@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - Route
 
@@ -15,6 +16,7 @@ struct AppView: View {
     @StateObject private var dataStore = DataStore()
     @State private var currentRoute: AppRoute = .dashboard
     @State private var menuOpen = false
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         ZStack {
@@ -35,6 +37,7 @@ struct AppView: View {
         .environmentObject(dataStore)
         .environmentObject(dataStore.locationManager)
         .preferredColorScheme(.dark)
+        .onAppear { dataStore.modelContext = modelContext }
     }
 
     private var isLive: Bool {

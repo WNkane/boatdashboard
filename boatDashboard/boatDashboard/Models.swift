@@ -1,5 +1,107 @@
 import Foundation
 import SwiftUI
+import SwiftData
+
+// MARK: - SwiftData Models
+
+@Model
+class ActivityDataPoint {
+    var timestamp: Date
+    var speedKmh: Double
+    var cadenceSpm: Int
+    var heartRateBpm: Int
+    var latitude: Double
+    var longitude: Double
+    var altitudeMeters: Double
+    var activity: DragonBoatActivity?
+
+    init(timestamp: Date, speedKmh: Double, cadenceSpm: Int,
+         heartRateBpm: Int, latitude: Double, longitude: Double,
+         altitudeMeters: Double) {
+        self.timestamp      = timestamp
+        self.speedKmh       = speedKmh
+        self.cadenceSpm     = cadenceSpm
+        self.heartRateBpm   = heartRateBpm
+        self.latitude       = latitude
+        self.longitude      = longitude
+        self.altitudeMeters = altitudeMeters
+    }
+}
+
+@Model
+class DragonBoatActivity {
+    var id: UUID
+    var name: String
+    var startTime: Date
+    var endTime: Date?
+    var totalDistanceMeters: Double
+    var averageSpeedKmh: Double
+    var maxSpeedKmh: Double
+    var averageCadence: Double
+    var maxCadence: Int
+    var averageHeartRate: Int
+    var maxHeartRate: Int
+    var workoutName: String?
+    @Relationship(deleteRule: .cascade, inverse: \ActivityDataPoint.activity)
+    var dataPoints: [ActivityDataPoint] = []
+
+    init(id: UUID = UUID(), name: String, startTime: Date,
+         endTime: Date? = nil, totalDistanceMeters: Double,
+         averageSpeedKmh: Double, maxSpeedKmh: Double,
+         averageCadence: Double, maxCadence: Int,
+         averageHeartRate: Int, maxHeartRate: Int,
+         workoutName: String? = nil) {
+        self.id                   = id
+        self.name                 = name
+        self.startTime            = startTime
+        self.endTime              = endTime
+        self.totalDistanceMeters  = totalDistanceMeters
+        self.averageSpeedKmh      = averageSpeedKmh
+        self.maxSpeedKmh          = maxSpeedKmh
+        self.averageCadence       = averageCadence
+        self.maxCadence           = maxCadence
+        self.averageHeartRate     = averageHeartRate
+        self.maxHeartRate         = maxHeartRate
+        self.workoutName          = workoutName
+    }
+
+    var distanceKm: Double { totalDistanceMeters / 1000 }
+
+    var durationSeconds: Int {
+        guard let end = endTime else { return 0 }
+        return Int(end.timeIntervalSince(startTime))
+    }
+
+    var durationFormatted: String {
+        let s = durationSeconds
+        let h = s / 3600
+        let m = (s % 3600) / 60
+        let sec = s % 60
+        return h > 0
+            ? String(format: "%d:%02d:%02d", h, m, sec)
+            : String(format: "%d:%02d", m, sec)
+    }
+
+    var dateFormatted: String {
+        let fmt = DateFormatter()
+        fmt.dateStyle = .medium
+        fmt.timeStyle = .short
+        fmt.locale = Locale(identifier: "zh_TW")
+        return fmt.string(from: startTime)
+    }
+}
+
+// MARK: - Pending DataPoint (value type for in-memory accumulation)
+
+struct PendingDataPoint {
+    let timestamp: Date
+    let speedKmh: Double
+    let cadenceSpm: Int
+    let heartRateBpm: Int
+    let latitude: Double
+    let longitude: Double
+    let altitudeMeters: Double
+}
 
 // MARK: - Heart Rate Zone
 
