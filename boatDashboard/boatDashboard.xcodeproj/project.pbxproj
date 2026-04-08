@@ -30,6 +30,7 @@
 		5A0EC4F02F670002004803AC /* BluetoothHeartRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */; };
 		5A0EC4F22F670002004803AC /* HeartRateDevicePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */; };
 		5A0EC4F42F670002004803AC /* BluetoothCadenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */; };
+		AA0001002F670002004803AC /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001012F670002004803AC /* ActivityDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothHeartRateManager.swift; sourceTree = "<group>"; };
 		5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateDevicePickerView.swift; sourceTree = "<group>"; };
 		5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCadenceManager.swift; sourceTree = "<group>"; };
+		AA0001012F670002004803AC /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				5A0EC4F12F670002004803AC /* BluetoothHeartRateManager.swift */,
 				5A0EC4F32F670002004803AC /* HeartRateDevicePickerView.swift */,
 				5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */,
+				AA0001012F670002004803AC /* ActivityDetailView.swift */,
 				5A0EC4C42F66FF0A004803AC /* ContentView.swift */,
 				5A0EC4C52F66FF0A004803AC /* LocationManager.swift */,
 				5A0EC4C92F66FF0A004803AC /* ActivitySummaryView.swift */,
@@ -323,6 +326,7 @@
 				5A0EC4F02F670002004803AC /* BluetoothHeartRateManager.swift in Sources */,
 				5A0EC4F22F670002004803AC /* HeartRateDevicePickerView.swift in Sources */,
 				5A0EC4F42F670002004803AC /* BluetoothCadenceManager.swift in Sources */,
+				AA0001002F670002004803AC /* ActivityDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
