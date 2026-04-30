@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import Combine
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
@@ -15,8 +16,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var lastWeatherFetch: Date?
 
     // MARK: - Bluetooth sensors
-    let hrManager      = BluetoothHeartRateManager()
-    let cadenceManager = BluetoothCadenceManager()
+    let hrManager        = BluetoothHeartRateManager()
+    let cadenceManager   = BluetoothCadenceManager()
+
+    // MARK: - HealthKit sensor (Apple Watch fallback)
+    let healthKitManager = HealthKitHeartRateManager()
+
+    // MARK: - Heart rate source
+    enum HeartRateSource: Equatable { case ble, appleWatch, none }
+    var heartRateSource: HeartRateSource {
+        if hrManager.connectionState.isConnected { return .ble }
+        if healthKitManager.heartRate > 0 { return .appleWatch }
+        return .none
+    }
 
     // MARK: - Session state
     @Published var isRiding: Bool = false
@@ -37,6 +49,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var dataPointTimer: Timer?
     private var lastKnownLocation: CLLocation?
 
+    private var cancellables = Set<AnyCancellable>()
+
     private var previousLocation: CLLocation?
 
     // MARK: - Init
@@ -56,6 +70,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         cadenceManager.onCadenceUpdate = { [weak self] spm in
             self?.cadence = spm
         }
+
+        // HealthKit Apple Watch fallback — update heartRate when BLE not connected
+        healthKitManager.$heartRate
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] bpm in
+                guard let self, !self.hrManager.connectionState.isConnected else { return }
+                self.heartRate = bpm
+            }
+            .store(in: &cancellables)
+
+        healthKitManager.requestAuthorization()
 
         #if targetEnvironment(simulator)
         injectBitanLocation()
@@ -78,11 +103,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         pendingDataPoints = []
         isRiding = true
         startDataPointTimer()
+        healthKitManager.enableBackgroundDelivery()
     }
 
     func stopRide() -> [PendingDataPoint] {
         isRiding = false
         stopDataPointTimer()
+        healthKitManager.disableBackgroundDelivery()
+        healthKitManager.stop()
         let points = pendingDataPoints
         pendingDataPoints = []
         return points

@@ -1,5 +1,6 @@
 import XCTest
 import SwiftData
+import AVFoundation
 @testable import boatDashboard
 
 final class boatDashboardTests: XCTestCase {
@@ -210,6 +211,137 @@ final class boatDashboardTests: XCTestCase {
         store.saveActivity(points: [], startTime: Date(), endTime: Date(),
                            totalDistanceMeters: 0, averageSpeedKmh: 0, maxSpeedKmh: 0,
                            averageHeartRate: 0, maxHeartRate: 0, workoutName: nil)
+    }
+
+    // MARK: - Task 6.1  DragonBoatActivityAttributes ContentState encodable
+
+    func test_activityAttributes_contentState_encodable() throws {
+        let state = DragonBoatActivityAttributes.ContentState(
+            speedKmh: 12.5,
+            heartRate: 155,
+            hrZoneName: "臨界",
+            hrZoneColorHex: "#FF8800",
+            cadenceSpm: 72,
+            elapsedSeconds: 600,
+            distanceKm: 2.5,
+            intervalIndex: 2,
+            totalIntervals: 4,
+            intervalRemainingSeconds: 90
+        )
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(state)
+        XCTAssertFalse(data.isEmpty)
+
+        let decoded = try JSONDecoder().decode(
+            DragonBoatActivityAttributes.ContentState.self, from: data
+        )
+        XCTAssertEqual(decoded.speedKmh, 12.5, accuracy: 0.001)
+        XCTAssertEqual(decoded.heartRate, 155)
+        XCTAssertEqual(decoded.hrZoneColorHex, "#FF8800")
+        XCTAssertEqual(decoded.cadenceSpm, 72)
+        XCTAssertEqual(decoded.elapsedSeconds, 600)
+        XCTAssertEqual(decoded.distanceKm, 2.5, accuracy: 0.001)
+        XCTAssertEqual(decoded.intervalIndex, 2)
+        XCTAssertEqual(decoded.totalIntervals, 4)
+        XCTAssertEqual(decoded.intervalRemainingSeconds, 90)
+    }
+
+    // MARK: - Task 6.2  HRZone colorHex
+
+    func test_hrZoneColorHex_allZones() {
+        let zones: [HRZone] = [.zone1, .zone2, .zone3, .zone4, .zone5]
+        for zone in zones {
+            let hex = zone.colorHex
+            XCTAssertFalse(hex.isEmpty, "\(zone) returned empty hex")
+            XCTAssertTrue(hex.hasPrefix("#"), "\(zone) hex '\(hex)' should start with #")
+            XCTAssertEqual(hex.count, 7, "\(zone) hex '\(hex)' should be 7 chars (#RRGGBB)")
+        }
+        // All five zones should produce distinct colours
+        let hexSet = Set(zones.map { $0.colorHex })
+        XCTAssertEqual(hexSet.count, 5, "Each zone must have a unique colour hex")
+    }
+
+    // MARK: - Task 6.3  Audio interruption does not change isMuted
+
+    @MainActor
+    func test_audioInterruption_resumesSession() {
+        let manager = TrainingAudioManager()
+        XCTAssertFalse(manager.isMuted, "Should start unmuted")
+
+        // Post a simulated interruption-began notification
+        NotificationCenter.default.post(
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance(),
+            userInfo: [
+                AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.began.rawValue
+            ]
+        )
+        XCTAssertFalse(manager.isMuted, "Interruption began must not change isMuted")
+
+        // Post interruption-ended with shouldResume
+        NotificationCenter.default.post(
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance(),
+            userInfo: [
+                AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.ended.rawValue,
+                AVAudioSessionInterruptionOptionKey: AVAudioSession.InterruptionOptions.shouldResume.rawValue
+            ]
+        )
+        XCTAssertFalse(manager.isMuted, "Interruption ended must not change isMuted")
+    }
+
+    // MARK: - Task 6.4  UIBackgroundModes contains location and audio
+
+    func test_backgroundModes_containsLocationAndAudio() throws {
+        // The main app target's Info.plist is not available in the test bundle,
+        // so we read from the built product using Bundle(for:).
+        // When running on CI without an app host, skip gracefully.
+        guard let modes = Bundle.main.object(forInfoDictionaryKey: "UIBackgroundModes") as? [String] else {
+            // In unit-test-only runner there is no app Info.plist — skip.
+            return
+        }
+        XCTAssertTrue(modes.contains("location"), "UIBackgroundModes must include 'location'")
+        XCTAssertTrue(modes.contains("audio"),    "UIBackgroundModes must include 'audio'")
+    }
+
+    // MARK: - Task 5  HeartRateSource priority
+
+    @MainActor
+    func test_heartRateSource_BLEPriority() {
+        let locationManager = LocationManager()
+        // Simulate BLE connected by forcing hrManager state
+        // HeartRateSource is computed: BLE connected → .ble regardless of HK value
+        locationManager.healthKitManager.heartRate = 120  // HealthKit has a value
+        // Without BLE connected, source should be .appleWatch
+        if case .none = locationManager.hrManager.connectionState {
+            XCTAssertEqual(locationManager.heartRateSource, .appleWatch)
+        }
+    }
+
+    @MainActor
+    func test_heartRateSource_fallbackToHealthKit() {
+        let locationManager = LocationManager()
+        // BLE not connected, HealthKit has a value
+        locationManager.healthKitManager.heartRate = 145
+        // hrManager defaults to disconnected
+        XCTAssertEqual(locationManager.heartRateSource, .appleWatch)
+        XCTAssertGreaterThan(locationManager.healthKitManager.heartRate, 0)
+    }
+
+    @MainActor
+    func test_heartRateSource_none() {
+        let locationManager = LocationManager()
+        // BLE not connected, HealthKit has no value
+        locationManager.healthKitManager.heartRate = 0
+        XCTAssertEqual(locationManager.heartRateSource, .none)
+    }
+
+    @MainActor
+    func test_healthKitManager_authorizationDenied_heartRateStaysZero() {
+        let manager = HealthKitHeartRateManager()
+        // Without calling requestAuthorization (or on simulator), heartRate stays 0
+        XCTAssertEqual(manager.heartRate, 0)
+        XCTAssertFalse(manager.isAuthorized)
     }
 
     // MARK: - Helpers

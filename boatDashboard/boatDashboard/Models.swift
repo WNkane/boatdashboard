@@ -1,6 +1,9 @@
 import Foundation
 import SwiftUI
 import SwiftData
+#if canImport(ActivityKit)
+import ActivityKit
+#endif
 
 // MARK: - SwiftData Models
 
@@ -88,6 +91,42 @@ class DragonBoatActivity {
         fmt.timeStyle = .short
         fmt.locale = Locale(identifier: "zh_TW")
         return fmt.string(from: startTime)
+    }
+}
+
+// MARK: - Live Activity Attributes
+
+#if canImport(ActivityKit)
+struct DragonBoatActivityAttributes: ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        var speedKmh: Double
+        var heartRate: Int
+        var hrZoneName: String
+        var hrZoneColorHex: String   // hex string, e.g. "#FF3366"
+        var cadenceSpm: Int
+        var elapsedSeconds: Int
+        var distanceKm: Double
+        var intervalIndex: Int       // 0 = 無課表
+        var totalIntervals: Int
+        var intervalRemainingSeconds: Int
+    }
+
+    var workoutName: String?
+    var startTime: Date
+}
+#endif
+
+// MARK: - HRZone hex helper
+
+extension HRZone {
+    var colorHex: String {
+        switch self {
+        case .zone1: return "#999999"
+        case .zone2: return "#3399FF"
+        case .zone3: return "#33CC66"
+        case .zone4: return "#FF8800"
+        case .zone5: return "#FF2233"
+        }
     }
 }
 

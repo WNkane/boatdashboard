@@ -1,5 +1,8 @@
 import SwiftUI
 import MapKit
+#if canImport(ActivityKit)
+import ActivityKit
+#endif
 
 // MARK: - Live Dashboard
 
@@ -21,6 +24,11 @@ struct LiveDashboardView: View {
     // Device pickers
     @State private var showHRPicker      = false
     @State private var showCadencePicker = false
+
+    // Live Activity
+    #if canImport(ActivityKit)
+    @State private var liveActivity: Activity<DragonBoatActivityAttributes>?
+    #endif
 
     // Workout session
     @State private var currentIntervalIndex = 0
@@ -195,6 +203,7 @@ struct LiveDashboardView: View {
                 }
             }
         }
+        startLiveActivity()
     }
 
     private func endRide() {
@@ -215,6 +224,7 @@ struct LiveDashboardView: View {
             maxHeartRate:         locationManager.maxHeartRate,
             workoutName:          workoutPlan?.name
         )
+        endLiveActivity()
         showSummary = true
     }
 
@@ -222,6 +232,8 @@ struct LiveDashboardView: View {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             sessionElapsed  += 1
             intervalElapsed += 1
+            updateLiveActivity()
+
             guard let iv = currentInterval else { return }
 
             // Countdown beep at 3 / 2 / 1 seconds remaining
@@ -250,6 +262,71 @@ struct LiveDashboardView: View {
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
+    }
+
+    // MARK: - Live Activity
+
+    private func startLiveActivity() {
+        #if canImport(ActivityKit)
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+        let zone = HRZone.zone(for: locationManager.heartRate)
+        let initialState = DragonBoatActivityAttributes.ContentState(
+            speedKmh:                locationManager.speed,
+            heartRate:               locationManager.heartRate,
+            hrZoneName:              zone.name,
+            hrZoneColorHex:          zone.colorHex,
+            cadenceSpm:              locationManager.cadence,
+            elapsedSeconds:          Int(sessionElapsed),
+            distanceKm:              locationManager.totalDistance / 1000,
+            intervalIndex:           currentIntervalIndex,
+            totalIntervals:          workoutPlan?.intervals.count ?? 0,
+            intervalRemainingSeconds: Int(intervalRemaining)
+        )
+        let attrs = DragonBoatActivityAttributes(
+            workoutName: workoutPlan?.name,
+            startTime:   rideStartTime ?? Date()
+        )
+        do {
+            liveActivity = try Activity.request(
+                attributes: attrs,
+                content: .init(state: initialState, staleDate: nil)
+            )
+        } catch {
+            // Live Activity not available (simulator / older OS) — silently skip
+        }
+        #endif
+    }
+
+    private func updateLiveActivity() {
+        #if canImport(ActivityKit)
+        guard let activity = liveActivity else { return }
+        let zone = HRZone.zone(for: locationManager.heartRate)
+        let state = DragonBoatActivityAttributes.ContentState(
+            speedKmh:                locationManager.speed,
+            heartRate:               locationManager.heartRate,
+            hrZoneName:              zone.name,
+            hrZoneColorHex:          zone.colorHex,
+            cadenceSpm:              locationManager.cadence,
+            elapsedSeconds:          Int(sessionElapsed),
+            distanceKm:              locationManager.totalDistance / 1000,
+            intervalIndex:           currentIntervalIndex,
+            totalIntervals:          workoutPlan?.intervals.count ?? 0,
+            intervalRemainingSeconds: Int(intervalRemaining)
+        )
+        Task {
+            await activity.update(.init(state: state, staleDate: nil))
+        }
+        #endif
+    }
+
+    private func endLiveActivity() {
+        #if canImport(ActivityKit)
+        guard let activity = liveActivity else { return }
+        Task {
+            await activity.end(dismissalPolicy: .immediate)
+        }
+        liveActivity = nil
+        #endif
     }
 }
 
@@ -437,6 +514,13 @@ struct HRZoneCell: View {
                     .monospacedDigit()
                 Text("bpm").font(.caption2).foregroundStyle(.gray)
             }
+
+            // Source badge
+            if let sourceLabel = sourceBadgeLabel {
+                Text(sourceLabel)
+                    .font(.system(size: 8))
+                    .foregroundStyle(.gray.opacity(0.6))
+            }
         }
         .padding(.vertical, isCompact ? 4 : 6)
         .frame(maxWidth: .infinity)
@@ -444,6 +528,14 @@ struct HRZoneCell: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(bpm > 0 ? zone.color.opacity(0.08) : Color.clear)
         )
+    }
+
+    private var sourceBadgeLabel: String? {
+        switch state {
+        case .connected: return "BLE"
+        default:
+            return bpm > 0 ? "Apple Watch" : nil
+        }
     }
 }
 

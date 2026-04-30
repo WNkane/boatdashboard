@@ -17,6 +17,37 @@ class TrainingAudioManager: NSObject, ObservableObject {
             options: [.mixWithOthers, .duckOthers]
         )
         try? AVAudioSession.sharedInstance().setActive(true)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAudioInterruption(_:)),
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance()
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func handleAudioInterruption(_ notification: Notification) {
+        guard let info = notification.userInfo,
+              let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue)
+        else { return }
+
+        switch type {
+        case .began:
+            // 電話來電，系統自動暫停 synthesizer，不需額外操作
+            break
+        case .ended:
+            let optionsValue = info[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+            if options.contains(.shouldResume) {
+                try? AVAudioSession.sharedInstance().setActive(true)
+            }
+        @unknown default:
+            break
+        }
     }
 
     // MARK: - Public API
