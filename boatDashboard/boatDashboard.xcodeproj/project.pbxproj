@@ -32,7 +32,6 @@
 		5A0EC4F42F670002004803AC /* BluetoothCadenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EC4F52F670002004803AC /* BluetoothCadenceManager.swift */; };
 		AA0001002F670002004803AC /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0001012F670002004803AC /* ActivityDetailView.swift */; };
 		AA0002002F670002004803AC /* HealthKitHeartRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0002012F670002004803AC /* HealthKitHeartRateManager.swift */; };
-		AA0003002F670002004803AC /* boatDashboard.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = AA0003012F670002004803AC /* boatDashboard.entitlements */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -505,6 +504,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要藍牙以連接 Garmin 手錶讀取即時心率數據。";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "龍舟訓練儀表板需要讀取您的心率資料，以便在訓練時顯示即時心跳與心率區間。";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "龍舟訓練儀表板不會寫入健康資料。";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要持續定位以追蹤划槳路線與計算距離。";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要存取您的位置以顯示地圖和即時速度資訊。";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "儲存訓練總結截圖至相簿。";
@@ -519,7 +519,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -542,6 +542,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要藍牙以連接 Garmin 手錶讀取即時心率數據。";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "龍舟訓練儀表板需要讀取您的心率資料，以便在訓練時顯示即時心跳與心率區間。";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "龍舟訓練儀表板不會寫入健康資料。";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "需要持續定位以追蹤划槳路線與計算距離。";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要存取您的位置以顯示地圖和即時速度資訊。";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "儲存訓練總結截圖至相簿。";
@@ -556,7 +557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = boatDashboard.boatDashboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
